@@ -54,7 +54,7 @@ BOSS_LOOT_POOLS = {
         "Cheese Moon", "Flame of Argol", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
-        "Cheese-Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
+        "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
         "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ],
     "King Ratsar": [
@@ -82,7 +82,7 @@ BOSS_LOOT_POOLS = {
         "Magma Mia", "Gorgon Ratsay's Toothpick", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
-        "Cheese-Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
+        "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
         "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ],
     "Sponge Blob": [
@@ -103,7 +103,7 @@ BOSS_LOOT_POOLS = {
         "Twin Pillars of Justice", "Amon Ram, the Creator", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
-        "Cheese-Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
+        "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
         "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ]
 }
@@ -141,11 +141,25 @@ if not windows:
     exit()
 
 game = windows[0]
+
+# INTERCEPTING TERMINATION SYSTEM
+def on_closing():
+    """Forces the entire process tree to shut down immediately."""
+    try:
+        root.destroy()
+    except Exception:
+        pass
+    os._exit(0) # Hard terminate to flush the background OCR loop instantly
+
 root = tk.Tk()
 root.withdraw()
 
 if sys.platform.startswith('win'):
     root.iconbitmap(default=sys.executable)
+
+# Bind interception interface to root container
+root.protocol("WM_DELETE_WINDOW", on_closing)
+
 
 # ─────────────────────────────────────────────────────────────
 # GRAPHICAL DASHBOARD UI COMPONENT
@@ -156,6 +170,9 @@ class Dashboard(tk.Toplevel):
         self.title("Tempest - Dungeon Tracker")
         self.geometry("900x680")
         self.configure(bg="#11111d")
+
+        # Explicitly bind the Top-Level "X" exit action as well
+        self.protocol("WM_DELETE_WINDOW", on_closing)
 
         # Dynamic Top-Left Windows Icon Skinning Implementation
         if sys.platform.startswith('win'):
@@ -475,7 +492,7 @@ def ocr_worker():
                     save_run(current_active_boss, auto_loot)
                     
                     tracker_armed = False
-                    current_state = STATE_LOCKED_UNTIL_GAMEPLAY
+                    current_state = STATE_LOCKED_UNTIL_LOADING
 
             except Exception as e:
                 print("Encounter Processing Error:", e)
