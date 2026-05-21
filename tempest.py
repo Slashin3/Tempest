@@ -61,7 +61,7 @@ BOSS_LOOT_POOLS = {
         "Judgement", "Twin Fangs of Ratsar", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
-        "Cheese-Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
+        "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
         "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ],
     "Gatsbee": [
