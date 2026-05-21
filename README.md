@@ -1,4 +1,3 @@
-Markdown
 # Tempest - Dungeon Boss Tracker
 
 Tempest is a desktop application designed to track dungeon boss runs and kill statistics. Built with Python and Tkinter, it provides a clean, real-time user interface to log your gameplay data and keep track of your run histories efficiently.
