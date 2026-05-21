@@ -1,0 +1,15 @@
+# Ignore local run data logs
+*.json
+
+# Ignore PyInstaller build artifacts
+build/
+dist/
+*.spec
+
+# Ignore local Tesseract OCR engine binaries
+tesseract/
+Tesseract-OCR/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
