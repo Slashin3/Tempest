@@ -2,6 +2,9 @@
 
 Tempest is a desktop application designed to track dungeon boss runs and kill statistics. Built with Python and Tkinter, it provides a clean, real-time user interface to log your gameplay data and keep track of your run histories efficiently.
 
+<img width="1907" height="1009" alt="image" src="https://github.com/user-attachments/assets/e913eb75-bb95-49df-8333-2319b968d16d" />
+
+
 ## 🚀 Download & Run (For Users)
 
 You do not need Python or Git installed to use Tempest. You can download the ready-to-run Windows standalone application:
