@@ -10,7 +10,7 @@ Tempest is a desktop application designed to track dungeon boss runs and kill st
 You do not need Python or Git installed to use Tempest. You can download the ready-to-run Windows standalone application:
 
 1. Go to the [Releases](https://github.com/Slashin3/Tempest/releases) page.
-2. Download the latest `Tempest-v1.0.0-Windows.rar` file.
+2. Download the latest `Tempest-v1.0.2-Windows.rar` file.
 3. Extract the RAR file anywhere on your PC using WinRAR or 7-Zip.
 4. Open the extracted folder, find `tempest.exe` (with the blue storm vortex icon), and double-click to run!
 
