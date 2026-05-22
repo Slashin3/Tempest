@@ -1,15 +1,21 @@
-# Ignore local run data logs
-*.json
+# 1. Python Build and Artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# Ignore PyInstaller build artifacts
+# 2. PyInstaller Directories
 build/
 dist/
 *.spec
 
-# Ignore local Tesseract OCR engine binaries
-tesseract/
-Tesseract-OCR/
+# 3. Nuitka Compilation Directories
+tempest.build/
+tempest.dist/
 
-# Ignore Python cache
-__pycache__/
-*.pyc
+# 4. Local App Tracking Logs (Don't overwrite user metrics)
+farever_ocr_runs.json
+
+# 5. OS-specific system files
+.DS_Store
+Thumbs.db
