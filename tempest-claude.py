@@ -41,70 +41,70 @@ BOSS_LOOT_POOLS = {
         "Crown of the Sea", "Abyssal Shoulderplates", "Fin Armor", "Jenny Hanibal's Armored Cape", "Palm of the Lagoon", "Vesture of the Mussel Hunter", "Boots of Abyssal Essence",
         "Tides Hood", "Fins of the First Fish", "Delicate Marine Aiglets", "Cloak of the Third Wave Apostle", "Wings of the Prophet", "Ceremonial Siren Gloves", "Emblem of the Third Wave", "Ceremonial Nepsid Belt", "Spare Sandals of Young Nephisto",
         "Submarine Torpedo Helmet", "Jacket of the Last Pirate", "Burden of the Abyss", "Nepicur's Vacation Shorts", "Bleak Shell's Knee Pads",
-        "Charm of the Fisher King", "High-speed Clamdiggers", "Meropsian Crab", "Antelimbian Crab"
+        "Charm of the Fisher King", "High-speed Clamdiggers"
     ],
     "Nepsilon": [
         "Iron Fins of the Leviathan", "Ghost Clams of the Low Tide", "Poetrident",
         "Crown of the Sea", "Abyssal Shoulderplates", "Fin Armor", "Jenny Hanibal's Armored Cape", "Palm of the Lagoon", "Vesture of the Mussel Hunter", "Boots of Abyssal Essence",
         "Tides Hood", "Fins of the First Fish", "Delicate Marine Aiglets", "Cloak of the Third Wave Apostle", "Wings of the Prophet", "Ceremonial Siren Gloves", "Emblem of the Third Wave", "Ceremonial Nepsid Belt", "Spare Sandals of Young Nephisto",
         "Submarine Torpedo Helmet", "Jacket of the Last Pirate", "Burden of the Abyss", "Nepicur's Vacation Shorts", "Bleak Shell's Knee Pads",
-        "Charm of the Fisher King", "High-speed Clamdiggers", "Antelimbian Wingfish"
+        "Charm of the Fisher King", "High-speed Clamdiggers"
     ],
     "Reblochonk": [
         "Cheese Moon", "Flame of Argol", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
         "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
-        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam", "Navelian Bat"
+        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ],
     "King Ratsar": [
         "Judgement", "Twin Fangs of Ratsar", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
         "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
-        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam", "Krisomalese Bat"
+        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ],
     "Gatsbee": [
         "Thornlace", "Lady Bee's Ceremonial Stinger", "Eternal Flower Heart",
         "Royal Chamber Helmet", "Queen Spikes", "Whirring Gem of Apix", "Reflective Vest of the Hive Worker", "Gauntlets of the Royal Guard", "Flying Trousers Prototype", "Melain's Golden Greaves",
         "Scout Antennae", "Vision of the Beekeeper", "Hive Sprouts", "Casual Clothes of the Pollincess", "Veil of the Royal Nymph", "Vambraces of the Swarm", "Dancing Hivetree Belt", "Zenobee's Breeches", "War Sabatons of Apix",
         "Beewings", "Emblem of Radiant Nectar", "Flight of the Rumblebee", "Propolis Heart of Apix", "Silhouette of Apix",
-        "Palmaryllis", "Cleo's Ethereal Blossoms", "Semeruian Moth", "Zerzurean Leggybug"
+        "Palmaryllis", "Cleo's Ethereal Blossoms"
     ],
     "Lady Bee": [
         "Ipheion, Star Blossom", "Beefury, Blessed Blade of the Farseeker", "Eternal Flower Heart",
         "Royal Chamber Helmet", "Queen Spikes", "Whirring Gem of Apix", "Reflective Vest of the Hive Worker", "Gauntlets of the Royal Guard", "Flying Trousers Prototype", "Melain's Golden Greaves",
         "Scout Antennae", "Vision of the Beekeeper", "Hive Sprouts", "Casual Clothes of the Pollincess", "Veil of the Royal Nymph", "Vambraces of the Swarm", "Dancing Hivetree Belt", "Zenobee's Breeches", "War Sabatons of Apix",
         "Beewings", "Emblem of Radiant Nectar", "Flight of the Rumblebee", "Propolis Heart of Apix", "Silhouette of Apix",
-        "Palmaryllis", "Cleo's Ethereal Blossoms", "Zerzurean Leggybug", "Nescentine Leggybug"
+        "Palmaryllis", "Cleo's Ethereal Blossoms"
     ],
     "Golcano": [
         "Magma Mia", "Gorgon Ratsay's Toothpick", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
         "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
-        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam", "Ebral Dragoon"
+        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ],
     "Sponge Blob": [
         "Book of Mi'Mizan", "Horns of the Wind", "Poetrident",
         "Crown of the Sea", "Abyssal Shoulderplates", "Fin Armor", "Jenny Hanibal's Armored Cape", "Palm of the Lagoon", "Vesture of the Mussel Hunter", "Boots of Abyssal Essence",
         "Tides Hood", "Fins of the First Fish", "Delicate Marine Aiglets", "Cloak of the Third Wave Apostle", "Wings of the Prophet", "Ceremonial Siren Gloves", "Emblem of the Third Wave", "Ceremonial Nepsid Belt", "Spare Sandals of Young Nephisto",
         "Submarine Torpedo Helmet", "Jacket of the Last Pirate", "Burden of the Abyss", "Nepicur's Vacation Shorts", "Bleak Shell's Knee Pads",
-        "Charm of the Fisher King", "High-speed Clamdiggers", "Acidic Wingfish"
+        "Charm of the Fisher King", "High-speed Clamdiggers"
     ],
     "Queen Honeyzabeth": [
         "Wingsabers", "Pocket Hive", "Eternal Flower Heart",
         "Royal Chamber Helmet", "Queen Spikes", "Whirring Gem of Apix", "Reflective Vest of the Hive Worker", "Gauntlets of the Royal Guard", "Flying Trousers Prototype", "Melain's Golden Greaves",
         "Scout Antennae", "Vision of the Beekeeper", "Hive Sprouts", "Casual Clothes of the Pollincess", "Veil of the Royal Nymph", "Vambraces of the Swarm", "Dancing Hivetree Belt", "Zenobee's Breeches", "War Sabatons of Apix",
         "Beewings", "Emblem of Radiant Nectar", "Flight of the Rumblebee", "Propolis Heart of Apix", "Silhouette of Apix",
-        "Palmaryllis", "Cleo's Ethereal Blossoms", "Zerzurean Leggybug", "Ponogian Leggybug"
+        "Palmaryllis", "Cleo's Ethereal Blossoms"
     ],
     "Munster Chuck": [
         "Twin Pillars of Justice", "Amon Ram, the Creator", "Raclette Pan",
         "Armored Docker Cap", "Miner Ramparts", "Brie von de Cape", "Diskobold's Discus Throw Gloves", "Unity of the Thirty Kingdoms", "Wrong Trousers", "Buskins of Essential Emptiness",
         "Vision of the Cheeseslicer", "Dust Scarf", "Treasure Hunter's Straps", "Spirit of the Spelunker", "Vows of Prosperity", "Garment of the Aurock Master", "Rat-Vachol's Patched Up Pants", "Gold Pouches",
         "Cheese Covered Shoulderpads", "Reversible Bib of the Cheese Taster", "Gloves of Ninkilim the Envoy", "Relic of the Four Hundred", "Spelunking Shoes of Emmen Tunnel",
-        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam", "Rinuhrian Skunk"
+        "Goldilock's Thrice Latched Jacket", "Mystical Placemat of the Gourmet", "Knotr'Edam"
     ]
 }
 
@@ -313,6 +313,48 @@ def extract_clean_tokens(raw_text):
     raw_text = raw_text.replace("|", "I").replace("1", "I")
     return [t for t in re.findall(r'[A-Z0-9\']+', raw_text.upper()) if len(t) > 1]
 
+# ─────────────────────────────────────────────────────────────
+# BOSS HP BAR DETECTION
+# Scans the top-center region where the boss name + red HP bar
+# appears. Red pixels above threshold = fight is active.
+# This is the primary start-of-fight trigger, far more reliable
+# than OCR on the 0/1 quest text which can be missed.
+# ─────────────────────────────────────────────────────────────
+def is_boss_hp_bar_visible(sct, left, top, width, height):
+    """
+    Returns True if a red boss HP bar is detected at top-center of screen.
+    The boss HP bar in Farever sits roughly at:
+      - Horizontal: 30% to 70% of screen width (centered)
+      - Vertical:   3% to 9% of screen height (near top)
+    Red hue in HSV wraps around 0/180, so two masks are used.
+    Threshold: >4% of the scanned region must be red pixels.
+    """
+    hp_monitor = {
+        "top":    top  + int(height * 0.03),
+        "left":   left + int(width  * 0.30),
+        "width":  int(width  * 0.40),
+        "height": int(height * 0.06)
+    }
+    try:
+        img = np.array(sct.grab(hp_monitor))
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+        # Red wraps around 0 and 180 in HSV
+        mask1 = cv2.inRange(hsv, np.array([0,   120, 80]), np.array([10,  255, 255]))
+        mask2 = cv2.inRange(hsv, np.array([165, 120, 80]), np.array([180, 255, 255]))
+        red_mask = cv2.bitwise_or(mask1, mask2)
+
+        red_pixel_count = cv2.countNonZero(red_mask)
+        total_pixels    = hp_monitor["width"] * hp_monitor["height"]
+        ratio = red_pixel_count / total_pixels
+
+        # 4% threshold: conservative enough to avoid false positives
+        # but well below what a full or nearly-full HP bar produces.
+        # Tune up to 0.06 if you get false triggers in non-boss areas.
+        return ratio > 0.04
+    except Exception:
+        return False
+
 def scan_loot_window_until_loading(sct, left, top, width, height, active_boss):
     loot_monitor = {"top": top + int(height * 0.45), "left": left + int(width * 0.55), "width": int(width * 0.42), "height": int(height * 0.45)}
     loading_monitor = {"top": top + int(height * 0.85), "left": left, "width": int(width * 0.25), "height": int(height * 0.15)}
@@ -345,10 +387,10 @@ def scan_loot_window_until_loading(sct, left, top, width, height, active_boss):
             mask_blue = cv2.inRange(hsv, np.array([85, 40, 40]), np.array([125, 255, 255]))
             text_blue = pytesseract.image_to_string(mask_blue, config="--psm 6")
 
-            tokens_base = extract_clean_tokens(text_base)
-            tokens_gold = extract_clean_tokens(text_gold)
+            tokens_base   = extract_clean_tokens(text_base)
+            tokens_gold   = extract_clean_tokens(text_gold)
             tokens_purple = extract_clean_tokens(text_purple)
-            tokens_blue = extract_clean_tokens(text_blue)
+            tokens_blue   = extract_clean_tokens(text_blue)
             all_discovered_tokens = tokens_base + tokens_gold + tokens_purple + tokens_blue
 
             for item in target_pool:
@@ -366,9 +408,9 @@ def scan_loot_window_until_loading(sct, left, top, width, height, active_boss):
                             return True
                     return False
 
-                if evaluate_channel(tokens_gold): detected_rarity = "Legendary/Gold"
+                if evaluate_channel(tokens_gold):   detected_rarity = "Legendary/Gold"
                 elif evaluate_channel(tokens_purple): detected_rarity = "Epic/Purple"
-                elif evaluate_channel(tokens_blue): detected_rarity = "Rare/Blue"
+                elif evaluate_channel(tokens_blue):   detected_rarity = "Rare/Blue"
                 
                 if not detected_rarity and len(all_discovered_tokens) >= window_size:
                     for i in range(len(all_discovered_tokens) - window_size + 1):
@@ -395,13 +437,13 @@ def scan_loot_window_until_loading(sct, left, top, width, height, active_boss):
 def ocr_worker():
     global tracker_armed, current_active_boss
 
-    STATE_MONITORING = 0
-    STATE_LOCKED_UNTIL_LOADING = 1
+    STATE_MONITORING          = 0
+    STATE_LOCKED_UNTIL_LOADING  = 1
     STATE_LOCKED_UNTIL_GAMEPLAY = 2
     
     current_state = STATE_MONITORING
     
-    fight_start_time = None
+    fight_start_time          = None
     fight_start_timestamp_str = "--:--"
 
     with mss.MSS() as sct:
@@ -410,18 +452,19 @@ def ocr_worker():
                 left, top, width, height = game.left, game.top, game.width, game.height
 
                 loading_monitor = {
-                    "top": top + int(height * 0.85),
-                    "left": left,
-                    "width": int(width * 0.25),
+                    "top":   top  + int(height * 0.85),
+                    "left":  left,
+                    "width": int(width  * 0.25),
                     "height": int(height * 0.15)
                 }
                 
-                load_img = np.array(sct.grab(loading_monitor))
-                load_gray = cv2.cvtColor(load_img, cv2.COLOR_BGR2GRAY)
+                load_img   = np.array(sct.grab(loading_monitor))
+                load_gray  = cv2.cvtColor(load_img, cv2.COLOR_BGR2GRAY)
                 _, load_thresh = cv2.threshold(load_gray, 150, 255, cv2.THRESH_BINARY)
-                load_text = pytesseract.image_to_string(load_thresh, config="--psm 6").upper()
+                load_text  = pytesseract.image_to_string(load_thresh, config="--psm 6").upper()
                 is_loading_screen = "LOAD" in load_text or "DING" in load_text
 
+                # ── STATE: waiting for zone-out loading screen ──────────
                 if current_state == STATE_LOCKED_UNTIL_LOADING:
                     dash.update_status("Waiting for instance reset...", "#888888")
                     if is_loading_screen:
@@ -429,82 +472,62 @@ def ocr_worker():
                     time.sleep(0.2)
                     continue
 
+                # ── STATE: waiting for loading screen to clear ──────────
                 elif current_state == STATE_LOCKED_UNTIL_GAMEPLAY:
                     dash.update_status("Zoning into next instance...", "#f0c040")
                     if not is_loading_screen:
-                        tracker_armed = True
-                        current_state = STATE_MONITORING
-                        fight_start_time = None  
+                        tracker_armed             = True
+                        current_state             = STATE_MONITORING
+                        fight_start_time          = None
                         fight_start_timestamp_str = "--:--"
                         dash.update_status("Ready for next instance!", "#10b981")
-                        time.sleep(1.5) 
+                        time.sleep(1.5)
                     time.sleep(0.2)
                     continue
 
-                # 1. QUEST STATUS MONITOR (Right Side)
+                # ── STATE: actively monitoring for boss encounter ───────
+
+                # --- HP BAR DETECTION (primary start-of-fight signal) ---
+                hp_bar_visible = is_boss_hp_bar_visible(sct, left, top, width, height)
+
+                # --- QUEST TEXT OCR (used for boss name + death signal) -
                 monitor = {
-                    "top": top + int(height * 0.04),
-                    "left": left + int(width * 0.70),
-                    "width": int(width * 0.28),
+                    "top":   top  + int(height * 0.04),
+                    "left":  left + int(width  * 0.70),
+                    "width": int(width  * 0.28),
                     "height": int(height * 0.20)
                 }
 
-                # 2. BOSS HP BAR MONITOR (Top Center)
-                hp_monitor = {
-                    "top": top + int(height * 0.02),
-                    "left": left + int(width * 0.30),
-                    "width": int(width * 0.40),
-                    "height": int(height * 0.15)
-                }
-
-                # Process Quest Monitor
-                img = np.array(sct.grab(monitor))
-                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                img   = np.array(sct.grab(monitor))
+                gray  = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                 _, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
-                text = pytesseract.image_to_string(thresh, config="--psm 6")
+                text  = pytesseract.image_to_string(thresh, config="--psm 6")
                 cleaned = text.upper()
-
-                # Process Boss HP Monitor
-                hp_img = np.array(sct.grab(hp_monitor))
-                hp_gray = cv2.cvtColor(hp_img, cv2.COLOR_BGR2GRAY)
-                _, hp_thresh = cv2.threshold(hp_gray, 130, 255, cv2.THRESH_BINARY)
-                hp_text = pytesseract.image_to_string(hp_thresh, config="--psm 6").upper()
 
                 lines = [line.strip() for line in cleaned.split('\n') if line.strip()]
                 
-                is_dead = False
+                is_dead   = False
                 is_active = False
                 found_boss_text = ""
 
-                # Evaluate Quest Monitor
                 for line in lines:
-                    # STRICT check for 1/1 vs 0/1. 
-                    # Do NOT trigger death from the word "SLAIN" alone.
-                    if re.search(r'\b1\s*/\s*1\b', line):
-                        is_dead = True
-                    elif re.search(r'\b0\s*/\s*1\b', line):
-                        is_active = True
+                    boss_match = re.search(r'\b([01])\s*/\s*1\b', line)
+                    if boss_match:
+                        status_digit = boss_match.group(1)
+                        if status_digit == "1" or "SLAIN" in line:
+                            is_dead = True
+                        elif status_digit == "0":
+                            is_active = True
                     
-                    # Backup Boss Name Extraction from Quest Log
-                    payload = re.sub(r'\b[01]\s*/\s*1\b', '', line)
+                    payload = line.replace("0/1", "").replace("1/1", "")
                     payload = re.sub(r'\bS[1I]A[1I]N\b|\bSLAIN\b', '', payload)
                     payload = payload.replace("SPECIAL FOES", "").replace("FOE", "").strip()
                     if payload and len(payload) > 3:
                         found_boss_text = payload
 
-                # Evaluate Boss HP Monitor for Immediate Start Triggers
-                hp_boss_found = False
-                for key in BOSS_LOOT_POOLS.keys():
-                    # Check if any valid boss name appears in the top-center HP frame
-                    if key.upper() in hp_text or (key == "Nepsilon" and "NEPS" in hp_text):
-                        is_active = True
-                        hp_boss_found = True
-                        current_active_boss = key
-                        break
-
-                # Assign extracted boss identity from quest monitor if HP bar OCR missed it
-                if not hp_boss_found and found_boss_text:
-                    if "NEPS" in found_boss_text: 
+                # Update boss name from quest text whenever we have it
+                if found_boss_text:
+                    if "NEPS" in found_boss_text:
                         current_active_boss = "Nepsilon"
                     else:
                         for key in BOSS_LOOT_POOLS.keys():
@@ -512,43 +535,53 @@ def ocr_worker():
                                 current_active_boss = key
                                 break
 
-                # 1. ENCOUNTER START: Boss HP detected or Boss 0/1 detected
-                # Note: We check `not is_dead` to prevent false starts during the fading death UI
-                if is_active and not is_dead and tracker_armed:
-                    dash.update_status(f"Active Encounter: {current_active_boss}", "#3b82f6")
-                    if fight_start_time is None:
-                        fight_start_time = time.time()  
+                # ── ENCOUNTER START ─────────────────────────────────────
+                # Triggered by HP bar visibility OR quest 0/1 text.
+                # HP bar appears the instant the boss is targetable,
+                # well before OCR can reliably read the quest counter.
+                if tracker_armed and fight_start_time is None:
+                    if hp_bar_visible or is_active:
+                        fight_start_time          = time.time()
                         fight_start_timestamp_str = datetime.now().strftime("%H:%M")
+                        dash.update_status(f"Active Encounter: {current_active_boss}", "#3b82f6")
+                elif tracker_armed and fight_start_time is not None:
+                    # Already timing — just keep status updated
+                    if is_active or hp_bar_visible:
+                        dash.update_status(f"Active Encounter: {current_active_boss}", "#3b82f6")
 
-                # 2. ENCOUNTER END: Boss 1/1 Slain detected
+                # ── ENCOUNTER END ───────────────────────────────────────
                 elif is_dead and tracker_armed:
+                    # Calculate duration. fight_start_time should always
+                    # be set by now (HP bar detection catches the start),
+                    # but guard defensively just in case.
                     if fight_start_time is None:
-                        # Safety edge-case logic fallback
-                        fight_start_time = time.time()
-                        fight_start_timestamp_str = datetime.now().strftime("%H:%M")
-                        duration_str = "00:01"
+                        # Genuine fallback: somehow missed the entire fight.
+                        # Record 0 elapsed rather than a fake 1-second value.
+                        elapsed = 0
                     else:
                         elapsed = int(time.time() - fight_start_time)
-                        # Ensure duration rounds to at least 1 second
-                        if elapsed <= 0: elapsed = 1 
-                        m, s = elapsed // 60, elapsed % 60
-                        duration_str = f"{m:02d}:{s:02d}"
+
+                    # Clamp to at least 1 second to avoid 00:00 display
+                    if elapsed <= 0:
+                        elapsed = 1
+
+                    m, s = elapsed // 60, elapsed % 60
+                    duration_str = f"{m:02d}:{s:02d}"
 
                     dash.update_status(f"Reading drops for {current_active_boss} until exit...", "#f0c040")
-                    time.sleep(1.5) 
+                    time.sleep(1.5)
                     
                     auto_loot = scan_loot_window_until_loading(sct, left, top, width, height, current_active_boss)
                     
                     save_run(current_active_boss, auto_loot, duration_str, fight_start_timestamp_str)
                     
-                    tracker_armed = False
+                    tracker_armed    = False
                     fight_start_time = None
-                    current_state = STATE_LOCKED_UNTIL_LOADING
+                    current_state    = STATE_LOCKED_UNTIL_LOADING
 
             except Exception as e:
                 print("Encounter Processing Error:", e)
             
-            # Fast polling step interval to handle high frame rates
             time.sleep(0.1)
 
 # ─────────────────────────────────────────────────────────────
