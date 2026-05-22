@@ -30,8 +30,15 @@ else:
 # ─────────────────────────────────────────────────────────────
 # STORAGE BOUNDS
 # ─────────────────────────────────────────────────────────────
-DATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "farever_ocr_runs.json")
+if getattr(sys, 'frozen', False):
+    # Running as a compiled PyInstaller .exe
+    # sys.executable points directly to the active directory containing the .exe
+    EXE_DIR = os.path.dirname(os.path.abspath(sys.executable))
+else:
+    # Running standard raw Python script
+    EXE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+DATA_FILE = os.path.join(EXE_DIR, "farever_ocr_runs.json")
 # ─────────────────────────────────────────────────────────────
 # DUNGEON LOOT MATRIX
 # ─────────────────────────────────────────────────────────────
@@ -401,14 +408,15 @@ def ocr_worker():
     
     current_state = STATE_MONITORING
     
-    fight_start_time = None
-    fight_start_timestamp_str = "--:--"
+    fight_start_perf = None  
+    fight_start_timestamp_str = "--:--"  
 
     with mss.MSS() as sct:
         while True:
             try:
                 left, top, width, height = game.left, game.top, game.width, game.height
 
+                # 1. LOADING SCREEN MONITOR
                 loading_monitor = {
                     "top": top + int(height * 0.85),
                     "left": left,
@@ -434,20 +442,13 @@ def ocr_worker():
                     if not is_loading_screen:
                         tracker_armed = True
                         current_state = STATE_MONITORING
-                        fight_start_time = None  
+                        fight_start_perf = None  
                         fight_start_timestamp_str = "--:--"
+                        current_active_boss = None # Clear old boss name
                         dash.update_status("Ready for next instance!", "#10b981")
                         time.sleep(1.5) 
                     time.sleep(0.2)
                     continue
-
-                # 1. QUEST STATUS MONITOR (Right Side)
-                monitor = {
-                    "top": top + int(height * 0.04),
-                    "left": left + int(width * 0.70),
-                    "width": int(width * 0.28),
-                    "height": int(height * 0.20)
-                }
 
                 # 2. BOSS HP BAR MONITOR (Top Center)
                 hp_monitor = {
@@ -457,53 +458,49 @@ def ocr_worker():
                     "height": int(height * 0.15)
                 }
 
-                # Process Quest Monitor
+                hp_img = np.array(sct.grab(hp_monitor))
+                hp_gray = cv2.cvtColor(hp_img, cv2.COLOR_BGR2GRAY)
+                _, hp_thresh = cv2.threshold(hp_gray, 130, 255, cv2.THRESH_BINARY)
+                hp_text = pytesseract.image_to_string(hp_thresh, config="--psm 6").upper()
+
+                hp_boss_found = False
+                for key in BOSS_LOOT_POOLS.keys():
+                    if key.upper() in hp_text or (key == "Nepsilon" and "NEPS" in hp_text):
+                        hp_boss_found = True
+                        current_active_boss = key # Dynamic assignment if engaged
+                        break
+
+                # 3. QUEST STATUS MONITOR (Right Side)
+                monitor = {
+                    "top": top + int(height * 0.04),
+                    "left": left + int(width * 0.70),
+                    "width": int(width * 0.28),
+                    "height": int(height * 0.20)
+                }
+
                 img = np.array(sct.grab(monitor))
                 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                 _, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
                 text = pytesseract.image_to_string(thresh, config="--psm 6")
                 cleaned = text.upper()
 
-                # Process Boss HP Monitor
-                hp_img = np.array(sct.grab(hp_monitor))
-                hp_gray = cv2.cvtColor(hp_img, cv2.COLOR_BGR2GRAY)
-                _, hp_thresh = cv2.threshold(hp_gray, 130, 255, cv2.THRESH_BINARY)
-                hp_text = pytesseract.image_to_string(hp_thresh, config="--psm 6").upper()
-
                 lines = [line.strip() for line in cleaned.split('\n') if line.strip()]
                 
                 is_dead = False
-                is_active = False
                 found_boss_text = ""
 
-                # Evaluate Quest Monitor
                 for line in lines:
-                    # STRICT check for 1/1 vs 0/1. 
-                    # Do NOT trigger death from the word "SLAIN" alone.
                     if re.search(r'\b1\s*/\s*1\b', line):
                         is_dead = True
-                    elif re.search(r'\b0\s*/\s*1\b', line):
-                        is_active = True
                     
-                    # Backup Boss Name Extraction from Quest Log
                     payload = re.sub(r'\b[01]\s*/\s*1\b', '', line)
                     payload = re.sub(r'\bS[1I]A[1I]N\b|\bSLAIN\b', '', payload)
                     payload = payload.replace("SPECIAL FOES", "").replace("FOE", "").strip()
                     if payload and len(payload) > 3:
                         found_boss_text = payload
 
-                # Evaluate Boss HP Monitor for Immediate Start Triggers
-                hp_boss_found = False
-                for key in BOSS_LOOT_POOLS.keys():
-                    # Check if any valid boss name appears in the top-center HP frame
-                    if key.upper() in hp_text or (key == "Nepsilon" and "NEPS" in hp_text):
-                        is_active = True
-                        hp_boss_found = True
-                        current_active_boss = key
-                        break
-
-                # Assign extracted boss identity from quest monitor if HP bar OCR missed it
-                if not hp_boss_found and found_boss_text:
+                # Pre-identify the boss from the quest objective tracker as soon as you step into the room
+                if not hp_boss_found and found_boss_text and not is_dead:
                     if "NEPS" in found_boss_text: 
                         current_active_boss = "Nepsilon"
                     else:
@@ -511,28 +508,29 @@ def ocr_worker():
                             if key.upper() in found_boss_text:
                                 current_active_boss = key
                                 break
+                    if current_active_boss and fight_start_perf is None:
+                        dash.update_status(f"Approaching: {current_active_boss}", "#a855f7")
 
-                # 1. ENCOUNTER START: Boss HP detected or Boss 0/1 detected
-                # Note: We check `not is_dead` to prevent false starts during the fading death UI
-                if is_active and not is_dead and tracker_armed:
+                # ─────────────────────────────────────────────────────────────
+                # SIMPLIFIED LIFECYCLE EVALUATION
+                # ─────────────────────────────────────────────────────────────
+                
+                # START TRIGGER: Only starts the timer when the top-center HP bar is physically visible.
+                if hp_boss_found and not is_dead and tracker_armed:
                     dash.update_status(f"Active Encounter: {current_active_boss}", "#3b82f6")
-                    if fight_start_time is None:
-                        fight_start_time = time.time()  
+                    if fight_start_perf is None:
+                        fight_start_perf = time.perf_counter()
                         fight_start_timestamp_str = datetime.now().strftime("%H:%M")
 
-                # 2. ENCOUNTER END: Boss 1/1 Slain detected
-                elif is_dead and tracker_armed:
-                    if fight_start_time is None:
-                        # Safety edge-case logic fallback
-                        fight_start_time = time.time()
-                        fight_start_timestamp_str = datetime.now().strftime("%H:%M")
-                        duration_str = "00:01"
-                    else:
-                        elapsed = int(time.time() - fight_start_time)
-                        # Ensure duration rounds to at least 1 second
-                        if elapsed <= 0: elapsed = 1 
-                        m, s = elapsed // 60, elapsed % 60
-                        duration_str = f"{m:02d}:{s:02d}"
+                # STOP TRIGGER: Fires instantly when quest log updates to 1/1
+                elif is_dead and tracker_armed and fight_start_perf is not None:
+                    stop_perf = time.perf_counter()
+                    
+                    elapsed_seconds = int(round(stop_perf - fight_start_perf))
+                    if elapsed_seconds <= 0: 
+                        elapsed_seconds = 1 
+                    m, s = elapsed_seconds // 60, elapsed_seconds % 60
+                    duration_str = f"{m:02d}:{s:02d}"
 
                     dash.update_status(f"Reading drops for {current_active_boss} until exit...", "#f0c040")
                     time.sleep(1.5) 
@@ -541,14 +539,16 @@ def ocr_worker():
                     
                     save_run(current_active_boss, auto_loot, duration_str, fight_start_timestamp_str)
                     
+                    # Tear down session
                     tracker_armed = False
-                    fight_start_time = None
+                    fight_start_perf = None
+                    fight_start_timestamp_str = "--:--"
+                    current_active_boss = None
                     current_state = STATE_LOCKED_UNTIL_LOADING
 
             except Exception as e:
                 print("Encounter Processing Error:", e)
             
-            # Fast polling step interval to handle high frame rates
             time.sleep(0.1)
 
 # ─────────────────────────────────────────────────────────────
