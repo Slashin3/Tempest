@@ -38,7 +38,7 @@ else:
 DATA_FILE = os.path.join(EXE_DIR, "farever_ocr_runs.json")
 
 # ─────────────────────────────────────────────────────────────
-# DUNGEON LOOT MATRIX (Updated with Type Tags)
+# DUNGEON LOOT MATRIX
 # ─────────────────────────────────────────────────────────────
 BOSS_LOOT_POOLS = {
     "Crabgantua": [
@@ -120,7 +120,11 @@ VALID_WEAPONS = {
     "Ipheion, Star Blossom", "Beefury, Blessed Blade of the Farseeker", 
     "Magma Mia", "Gorgon Ratsay's Toothpick", "Book of Mi'Mizan", 
     "Horns of the Wind", "Wingsabers", "Pocket Hive", 
-    "Twin Pillars of Justice", "Amon Ram, the Creator", "Poetrident", "Raclette Pan", "Eternal Flower Heart"
+    "Twin Pillars of Justice", "Amon Ram, the Creator"
+}
+
+VALID_TRINKETS = {
+    "Poetrident", "Raclette Pan", "Eternal Flower Heart"
 }
 
 def load_data():
@@ -138,14 +142,18 @@ def save_data(data_to_save):
 # ─────────────────────────────────────────────────────────────
 data = load_data()
 tracker_armed = True
-current_active_boss = "Unknown Boss"
+current_active_boss = None
 
-windows = gw.getWindowsWithTitle("Farever")
-if not windows:
+all_windows = gw.getAllWindows()
+game = None
+for w in all_windows:
+    if "FAREVER" in w.title.upper():
+        game = w
+        break
+
+if not game:
     print("Error: Farever window must be running to start tracking!")
     sys.exit()
-
-game = windows[0]
 
 def on_closing():
     try: root.destroy()
@@ -287,7 +295,6 @@ class Dashboard(tk.Toplevel):
         for widget in self.log_container.winfo_children(): 
             widget.destroy()
 
-        # VIEW BLOCK 1: Chronological Session Log History Tracker
         if self.current_view_mode == "ALL":
             self.log_title_lbl.config(text="RECENT DUNGEON RUNS LOG")
             target_runs = data["runs"][-50:]
@@ -314,7 +321,6 @@ class Dashboard(tk.Toplevel):
                     clean_name = item_str.split(" (")[0]
                     tk.Label(row, text=f"[{clean_name}] ", fg=color, bg="#171725", font=("Segoe UI", 9, "bold")).pack(side="left", padx=2)
 
-        # VIEW BLOCK 2: Categorized Static Loot Table Reference (Clean, uniform style)
         else:
             self.log_title_lbl.config(text=f"ALL POSSIBLE DROPS: {self.current_view_mode.upper()}")
             loot_pool = BOSS_LOOT_POOLS.get(self.current_view_mode, [])
@@ -324,53 +330,102 @@ class Dashboard(tk.Toplevel):
                 row.pack(fill="x", pady=2)
                 tk.Label(row, text="No baseline item definition schema indexed for target model.", fg="#666666", bg="#171725", font=("Segoe UI", 10, "italic")).pack(side="left")
             else:
-                # Filter item strings cleanly by names and tags
                 weapons = sorted([item for item in loot_pool if item in VALID_WEAPONS])
+                trinkets = sorted([item for item in loot_pool if item in VALID_TRINKETS])
                 mounts = sorted([item for item in loot_pool if "(mount)" in item.lower()])
                 gliders = sorted([item for item in loot_pool if "(glider)" in item.lower()])
                 
-                # Armors comprise anything remaining that doesn't trigger secondary system sets
                 armors = sorted([
                     item for item in loot_pool 
                     if item not in VALID_WEAPONS 
+                    and item not in VALID_TRINKETS
                     and "(mount)" not in item.lower() 
                     and "(glider)" not in item.lower()
                 ])
 
                 def render_category_header(title_text):
-                    hdr_frame = tk.Frame(self.log_container, bg="#0a0a0f", pady=8)
-                    hdr_frame.pack(fill="x", pady=(8, 2))
+                    hdr_frame = tk.Frame(self.log_container, bg="#0a0a0f", pady=12)
+                    hdr_frame.pack(fill="x", pady=(10, 2))
                     
-                    # Category Text Title
-                    tk.Label(hdr_frame, text=title_text, fg="#f0c040", bg="#0a0a0f", font=("Segoe UI", 9, "bold")).pack(side="left", padx=4)
+                    tk.Label(hdr_frame, text=title_text, fg="#ffd700", bg="#0a0a0f", font=("Segoe UI", 10, "bold")).pack(side="left", padx=4)
                     
-                    # FIX: Using a raw tk.Frame with explicit pixel heights for a clean line artifact
                     accent_line = tk.Frame(hdr_frame, bg="#27273a", height=1, bd=0, highlightthickness=0)
-                    accent_line.pack(side="left", fill="x", expand=True, padx=(8, 0), pady=2)
-                    accent_line.pack_propagate(False) # Prevents the frame from scaling up
+                    accent_line.pack(side="left", fill="x", expand=True, padx=(12, 0), pady=2)
+                    accent_line.pack_propagate(False)
 
-                def render_item_rows(item_list):
+                def render_item_rows(item_list, type_label_string):
                     for item in item_list:
-                        row = tk.Frame(self.log_container, bg="#171725", pady=5, padx=16)
-                        row.pack(fill="x", pady=1, expand=True)
-                        tk.Label(row, text="•", fg="#4b5563", bg="#171725", font=("Segoe UI", 10)).pack(side="left")
-                        tk.Label(row, text=item, fg="#dddddd", bg="#171725", font=("Segoe UI", 10)).pack(side="left", padx=8)
+                        display_name = item.replace(" (mount)", "").replace(" (glider)", "")
+                        
+                        row = tk.Frame(self.log_container, bg="#151522", height=38)
+                        row.pack(fill="x", pady=2, expand=True)
+                        row.pack_propagate(False)
+
+                        row.grid_columnconfigure(0, weight=4, uniform="group1")
+                        row.grid_columnconfigure(1, weight=2, uniform="group1")
+
+                        if type_label_string == "Trinkets":
+                            item_color = "#3b82f6"
+                        elif type_label_string == "Weapons":
+                            item_color = "#ffffff"
+                        elif type_label_string == "Armor":
+                            item_color = "#3b82f6"
+                        elif type_label_string in ["Collection (Mount)", "Collection (Glider)"]:
+                            item_color = "#a855f7"
+                        else:
+                            item_color = "#dddddd"
+
+                        name_lbl = tk.Label(row, text=display_name, fg=item_color, bg="#151522", 
+                                            font=("Segoe UI", 10, "bold" if type_label_string == "Weapons" else "normal"), anchor="w")
+                        name_lbl.grid(row=0, column=0, sticky="ew", padx=24, pady=8)
+
+                        type_lbl = tk.Label(row, text=type_label_string, fg="#aaaaaa", bg="#151522", font=("Segoe UI", 9), anchor="w")
+                        type_lbl.grid(row=0, column=1, sticky="ew", padx=12, pady=8)
+
+                        def make_hover_handler(target_row, n_lbl, t_lbl, base_fg):
+                            bg_default = "#151522"
+                            bg_hover = "#1c1c2e"
+                            
+                            def on_enter(e):
+                                target_row.config(bg=bg_hover)
+                                n_lbl.config(bg=bg_hover, fg="#ffffff")
+                                t_lbl.config(bg=bg_hover, fg="#ffffff")
+
+                            def on_leave(e):
+                                target_row.config(bg=bg_default)
+                                n_lbl.config(bg=bg_default, fg=base_fg)
+                                t_lbl.config(bg=bg_default, fg="#aaaaaa")
+                                
+                            return on_enter, on_leave
+
+                        enter_func, leave_func = make_hover_handler(row, name_lbl, type_lbl, item_color)
+                        
+                        row.bind("<Enter>", enter_func)
+                        row.bind("<Leave>", leave_func)
+                        name_lbl.bind("<Enter>", enter_func)
+                        name_lbl.bind("<Leave>", leave_func)
+                        type_lbl.bind("<Enter>", enter_func)
+                        type_lbl.bind("<Leave>", leave_func)
 
                 if weapons:
                     render_category_header("WEAPONS")
-                    render_item_rows(weapons)
+                    render_item_rows(weapons, "Weapons")
+
+                if trinkets:
+                    render_category_header("TRINKETS")
+                    render_item_rows(trinkets, "Trinkets")
 
                 if armors:
                     render_category_header("ARMOR & OTHER DROPS")
-                    render_item_rows(armors)
+                    render_item_rows(armors, "Armor")
 
                 if mounts:
                     render_category_header("MOUNTS")
-                    render_item_rows(mounts)
+                    render_item_rows(mounts, "Collection (Mount)")
 
                 if gliders:
                     render_category_header("GLIDERS")
-                    render_item_rows(gliders)
+                    render_item_rows(gliders, "Collection (Glider)")
 
         self.canvas.yview_moveto(0)
 
@@ -396,6 +451,7 @@ def save_run(boss_name, loot, duration, start_time_str):
 # RESOLUTION-AGNOSTIC SCAN MODULE
 # ─────────────────────────────────────────────────────────────
 def get_active_loot_pool(boss_name):
+    if not boss_name: return BOSS_LOOT_POOLS["Crabgantua"]
     for key, pool in BOSS_LOOT_POOLS.items():
         if key.upper() in boss_name.upper() or boss_name.upper() in key.upper(): return pool
     return BOSS_LOOT_POOLS["Crabgantua"]
@@ -447,7 +503,6 @@ def scan_loot_window_until_loading(sct, left, top, width, height, active_boss):
             all_discovered_tokens = tokens_base + tokens_gold + tokens_purple + tokens_blue
 
             for item in target_pool:
-                # Strip out formatting tags before running OCR fuzzy validation rules
                 clean_target_name = item.replace(" (mount)", "").replace(" (glider)", "")
                 item_tokens = [t for t in [re.sub(r'[^A-Z0-9\']', '', w.upper()) for w in clean_target_name.split()] if t]
                 window_size = len(item_tokens)
@@ -476,6 +531,8 @@ def scan_loot_window_until_loading(sct, left, top, width, height, active_boss):
                 if detected_rarity:
                     if clean_target_name in VALID_WEAPONS and detected_rarity in ["Legendary/Gold", "Epic/Purple"]:
                         candidate = f"{clean_target_name} ({detected_rarity})"
+                    elif clean_target_name in VALID_TRINKETS and detected_rarity in ["Legendary/Gold", "Epic/Purple"]:
+                        candidate = f"{clean_target_name} ({detected_rarity})"
                     else:
                         candidate = f"{clean_target_name} (Rare/Blue)"
 
@@ -488,6 +545,9 @@ def scan_loot_window_until_loading(sct, left, top, width, height, active_boss):
 
 # ─────────────────────────────────────────────────────────────
 # STATE WORKER SYSTEM (3-STAGE LIFECYCLE CONTROLLER)
+# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# IMMUTABLE BOSS ENGINE WORKER (SUSPENSION STRIPPED)
 # ─────────────────────────────────────────────────────────────
 def ocr_worker():
     global tracker_armed, current_active_boss
@@ -505,6 +565,49 @@ def ocr_worker():
             try:
                 left, top, width, height = game.left, game.top, game.width, game.height
 
+                # ─── PARSE OBJECTIVE SCREEN VALUES ───
+                hp_monitor = {"top": top + int(height * 0.02), "left": left + int(width * 0.30), "width": int(width * 0.40), "height": int(height * 0.15)}
+                hp_img = np.array(sct.grab(hp_monitor))
+                hp_gray = cv2.cvtColor(hp_img, cv2.COLOR_BGR2GRAY)
+                _, hp_thresh = cv2.threshold(hp_gray, 130, 255, cv2.THRESH_BINARY)
+                hp_text = pytesseract.image_to_string(hp_thresh, config="--psm 6").upper()
+
+                hp_boss_found = False
+                detected_hp_key = None
+                
+                # Check for absolute strict match of strings
+                for key in BOSS_LOOT_POOLS.keys():
+                    if key == "King Ratsar" and "RATSAR" in hp_text:
+                        hp_boss_found = True
+                        detected_hp_key = "King Ratsar"
+                        break
+                    elif key == "Nepsilon" and "NEPS" in hp_text and "RATSAR" not in hp_text:
+                        hp_boss_found = True
+                        detected_hp_key = "Nepsilon"
+                        break
+                    elif key != "Nepsilon" and key != "King Ratsar" and re.search(r'\b' + re.escape(key.upper()) + r'\b', hp_text):
+                        hp_boss_found = True
+                        detected_hp_key = key
+                        break
+
+                monitor = {"top": top + int(height * 0.04), "left": left + int(width * 0.70), "width": int(width * 0.28), "height": int(height * 0.20)}
+                img = np.array(sct.grab(monitor))
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                _, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
+                text = pytesseract.image_to_string(thresh, config="--psm 6")
+                lines = [line.strip() for line in text.upper().split('\n') if line.strip()]
+                
+                is_dead = False
+                found_boss_text = ""
+
+                for line in lines:
+                    if re.search(r'\b1\s*/\s*1\b', line): is_dead = True
+                    payload = re.sub(r'\b[01]\s*/\s*1\b', '', line)
+                    payload = re.sub(r'\bS[1I]A[1I]N\b|\bSLAIN\b', '', payload)
+                    payload = payload.replace("SPECIAL FOES", "").replace("FOE", "").strip()
+                    if payload and len(payload) > 3: found_boss_text = payload
+
+                # ─── STATE ENGINE STEPS ───
                 loading_monitor = {"top": top + int(height * 0.85), "left": left, "width": int(width * 0.25), "height": int(height * 0.15)}
                 load_img = np.array(sct.grab(loading_monitor))
                 load_gray = cv2.cvtColor(load_img, cv2.COLOR_BGR2GRAY)
@@ -531,45 +634,23 @@ def ocr_worker():
                     time.sleep(0.2)
                     continue
 
-                hp_monitor = {"top": top + int(height * 0.02), "left": left + int(width * 0.30), "width": int(width * 0.40), "height": int(height * 0.15)}
-                hp_img = np.array(sct.grab(hp_monitor))
-                hp_gray = cv2.cvtColor(hp_img, cv2.COLOR_BGR2GRAY)
-                _, hp_thresh = cv2.threshold(hp_gray, 130, 255, cv2.THRESH_BINARY)
-                hp_text = pytesseract.image_to_string(hp_thresh, config="--psm 6").upper()
-
-                hp_boss_found = False
-                for key in BOSS_LOOT_POOLS.keys():
-                    if key.upper() in hp_text or (key == "Nepsilon" and "NEPS" in hp_text):
-                        hp_boss_found = True
-                        current_active_boss = key 
-                        break
-
-                monitor = {"top": top + int(height * 0.04), "left": left + int(width * 0.70), "width": int(width * 0.28), "height": int(height * 0.20)}
-                img = np.array(sct.grab(monitor))
-                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                _, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
-                text = pytesseract.image_to_string(thresh, config="--psm 6")
-                lines = [line.strip() for line in text.upper().split('\n') if line.strip()]
-                
-                is_dead = False
-                found_boss_text = ""
-
-                for line in lines:
-                    if re.search(r'\b1\s*/\s*1\b', line): is_dead = True
-                    payload = re.sub(r'\b[01]\s*/\s*1\b', '', line)
-                    payload = re.sub(r'\bS[1I]A[1I]N\b|\bSLAIN\b', '', payload)
-                    payload = payload.replace("SPECIAL FOES", "").replace("FOE", "").strip()
-                    if payload and len(payload) > 3: found_boss_text = payload
-
-                if not hp_boss_found and found_boss_text and not is_dead:
-                    if "NEPS" in found_boss_text: current_active_boss = "Nepsilon"
+                # ─── RESOLVE CURRENT ENCOUNTER ACTIVE TARGETS ───
+                if hp_boss_found:
+                    current_active_boss = detected_hp_key
+                elif found_boss_text and not is_dead and not current_active_boss:
+                    if "RATSAR" in found_boss_text: 
+                        current_active_boss = "King Ratsar"
+                    elif "NEPS" in found_boss_text: 
+                        current_active_boss = "Nepsilon"
                     else:
                         for key in BOSS_LOOT_POOLS.keys():
-                            if key.upper() in found_boss_text:
+                            if re.search(r'\b' + re.escape(key.upper()) + r'\b', found_boss_text):
                                 current_active_boss = key
                                 break
-                    if current_active_boss and fight_start_perf is None:
-                        dash.update_status(f"Waiting to detect: {current_active_boss}", "#a855f7")
+
+                # UI Status Management
+                if current_active_boss and fight_start_perf is None and not is_dead:
+                    dash.update_status(f"Tracking Boss: {current_active_boss}", "#a855f7")
 
                 if hp_boss_found and not is_dead and tracker_armed:
                     dash.update_status(f"Active Encounter: {current_active_boss}", "#3b82f6")
