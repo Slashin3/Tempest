@@ -8,11 +8,17 @@ Tempest is a desktop application designed to track dungeon boss runs and kill st
 ## 🚀 Download & Run (For Users)
 
 You do not need Python or Git installed to use Tempest. You can download the ready-to-run Windows standalone application:
+## ⚠️ Stable Version Recommendation (Please Read)
 
-1. Go to the [Releases](https://github.com/Slashin3/Tempest/releases) page.
-2. Download the latest `Tempest-v1.0.2-Windows.rar` file.
-3. Extract the RAR file anywhere on your PC using WinRAR or 7-Zip.
-4. Open the extracted folder, find `tempest.exe` (with the blue storm vortex icon), and double-click to run!
+Please download **Version 1.0.4** from the releases tab rather than cloning the current `main` branch code.
+
+* 📥 **[Download Stable Release v1.0.4 Here](https://github.com/Slashin3/Tempest/releases/tag/v1.0.4)**
+
+### Why v1.0.4?
+The current development builds (v1.0.7+) are undergoing heavy refactoring to support multi-resolution UI upscaling and adaptive thresholding engines. If you experience initialization or tracking drops on the latest code, **v1.0.4 remains the most stable, reliable build** for standard baseline setups.
+
+*Note: If you run into any tracking loops that fail to reset after a dungeon clear, simply restart `tempestapp.exe` to flush the tracker's memory state.*
+
 
 ---
 
